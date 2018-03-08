@@ -1,0 +1,25 @@
+--- /etc/bash_completion	2015-08-12 16:13:29.000000000 -0400
++++ /etc/bash_completion	2018-03-08 19:39:03.093564538 -0500
+@@ -1 +1,22 @@
+ . /usr/share/bash-completion/bash_completion
++
++have()
++{
++    unset -v have
++    _have $1 && have=yes
++}
++
++# Backwards compat completion dir for /usr/local.
++#
++: ${BASH_COMPLETION_COMPAT_LOCAL_DIR:=/usr/local/etc/bash_completion.d}
++readonly BASH_COMPLETION_COMPAT_LOCAL_DIR
++
++# source compat completion directory definitions
++if [[ -d $BASH_COMPLETION_COMPAT_LOCAL_DIR && -r $BASH_COMPLETION_COMPAT_LOCAL_DIR && \
++    -x $BASH_COMPLETION_COMPAT_LOCAL_DIR ]]; then
++    for i in $(LC_ALL=C command ls "$BASH_COMPLETION_COMPAT_LOCAL_DIR"); do
++        i=$BASH_COMPLETION_COMPAT_LOCAL_DIR/$i
++        [[ ${i##*/} != @($_backup_glob|Makefile*|$_blacklist_glob) \
++            && -f $i && -r $i ]] && . "$i"
++    done
++fi
