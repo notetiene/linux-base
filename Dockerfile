@@ -32,7 +32,9 @@ RUN apt-get install \
     make \
     texinfo \
     man \
-    manpages
+    manpages \
+    vim \
+    mg
 
 RUN apt-get install \
     libgtkmm-3.0-dev
