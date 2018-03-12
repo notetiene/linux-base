@@ -8,31 +8,30 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && apt-get update && apt-get upgrade \
     && apt-get install \
-    apt-utils
 
 RUN apt-get install \
-    pkg-config
+    apt-utils \
+    aptitude \
     bash \
     bash-completion \
     sudo \
+    psmisc
+
+RUN apt-get install \
     gzip \
     tar \
     unzip \
     curl \
     wget \
     gawk \
-    ispell \
-    hunspell \
     attr \
+    cron \
+    sl
+
+RUN apt-get install \
     build-essential \
-    valgrind \
-    autoconf \
-    automake \
-    autotools-dev \
     make \
-    texinfo \
-    man \
-    manpages \
+    pkg-config
     vim \
     mg
 
