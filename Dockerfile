@@ -6,8 +6,7 @@ MAINTAINER Etienne Prud’homme <e.e.f.prudhomme@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
-    && apt-get update && apt-get upgrade \
-    && apt-get install \
+    && apt-get update && apt-get upgrade
 
 RUN apt-get install \
     apt-utils \
@@ -32,8 +31,17 @@ RUN apt-get install \
     build-essential \
     make \
     pkg-config
+
+RUN apt-get install \
     vim \
     mg
+
+RUN apt-get install \
+    traceroute \
+    iputils-ping \
+    iputils-arping \
+    whois \
+    dnsutils
 
 RUN mkdir -p /tmp/linux-base
 
