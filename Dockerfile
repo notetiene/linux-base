@@ -11,7 +11,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     apt-utils
 
 RUN apt-get install \
-    apt-utils \
+    pkg-config
     bash \
     bash-completion \
     sudo \
@@ -36,9 +36,6 @@ RUN apt-get install \
     vim \
     mg
 
-RUN apt-get install \
-    libgtkmm-3.0-dev
-
 RUN mkdir -p /tmp/linux-base
 
 COPY bash_completion.patch /tmp/linux-base
@@ -49,7 +46,7 @@ RUN cd /tmp/linux-base \
     && wget "https://sourceforge.net/projects/porg/files/latest/download" -O porg-latest.tar.gz \
     && tar xzf porg-latest.tar.gz \
     && cd porg-[0-9.]* \
-    && ./configure \
+    && ./configure --disable-grop \
     && make -j4 \
     && make install \
     && make logme-really
