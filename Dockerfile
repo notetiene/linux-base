@@ -59,3 +59,7 @@ RUN cd /tmp/linux-base \
     && make logme-really
 
 RUN rm -Rf /tmp/linux-base
+
+RUN tac /etc/apt/apt.conf \
+    | sed '0,/APT::Get::Assume-Yes "true";/{/APT::Get::Assume-Yes "true";/d;}' \
+    | tac > /etc/apt/apt.conf
